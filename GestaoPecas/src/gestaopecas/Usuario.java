@@ -9,11 +9,22 @@ package gestaopecas;
  * @author wilian_g_cardoso
  */
 public class Usuario {
+
     private String id;
     private String nome;
     private String senha;
     private String perfil;
 
+    public Usuario() {
+
+    }
+
+    public Usuario(String nome, String senha, String perfil) {
+        this.nome = nome;
+        this.senha = senha;
+        this.perfil = perfil;
+    }
+    
     public Usuario(String id, String nome, String senha, String perfil) {
         this.id = id;
         this.nome = nome;
@@ -52,6 +63,5 @@ public class Usuario {
     public void setPerfil(String perfil) {
         this.perfil = perfil;
     }
-    
-    
+
 }
