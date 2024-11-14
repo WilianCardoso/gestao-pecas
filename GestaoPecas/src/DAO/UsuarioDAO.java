@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -44,5 +45,20 @@ public class UsuarioDAO {
             throw new RuntimeException(e);
         }
         return usuario;
+    }
+    
+    public void cadastrarUsu(Usuario usuario) {
+        String sql = "insert into usuario(nome,senha,perfil)values(?,?,?)";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, usuario.getNome());
+            ps.setString(2, usuario.getSenha());
+            ps.setString(3, usuario.getPerfil());
+
+            ps.execute();
+            ps.close();
+            JOptionPane.showMessageDialog(null, "Usuario Cadastrado!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao adicionar usuario!");
+        }
     }
 }

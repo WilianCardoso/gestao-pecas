@@ -13,7 +13,8 @@ import javax.swing.JOptionPane;
  * @author cardo
  */
 public class TelaCadLogin extends javax.swing.JFrame {
-
+    
+    private Usuario usuario;
     /**
      * Creates new form TelaCadLogin
      */
@@ -35,9 +36,10 @@ public class TelaCadLogin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jtfUsu = new javax.swing.JTextField();
-        jtfSenha = new javax.swing.JTextField();
         jtfPerfil = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jpfSenha = new javax.swing.JPasswordField();
+        jbtCadastrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,46 +61,69 @@ public class TelaCadLogin extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel4.setText("Cadastro de Usuário");
 
+        jpfSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jpfSenhaActionPerformed(evt);
+            }
+        });
+
+        jbtCadastrar.setText("Cadastrar");
+        jbtCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtCadastrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(101, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jtfUsu))
+                        .addComponent(jtfUsu, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfPerfil)
-                            .addComponent(jtfSenha)))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(83, 83, 83))
+                            .addComponent(jpfSenha)
+                            .addComponent(jtfPerfil))))
+                .addContainerGap(66, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(74, 74, 74))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbtCadastrar)
+                        .addGap(146, 146, 146))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jtfUsu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jtfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jpfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jtfPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(jbtCadastrar)
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -118,6 +143,24 @@ public class TelaCadLogin extends javax.swing.JFrame {
     private void jtfUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfUsuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfUsuActionPerformed
+
+    private void jpfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpfSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jpfSenhaActionPerformed
+
+    private void jbtCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCadastrarActionPerformed
+        // TODO add your handling code here:
+         if (!jtfUsu.getText().isBlank() && !jpfSenha.getText().isBlank() && !jtfPerfil.getText().isBlank()) {
+            UsuarioDAO dao = new UsuarioDAO();
+            usuario = new Usuario(jtfUsu.getText(), jpfSenha.getText(), jtfPerfil.getText());
+            dao.cadastrarUsu(usuario);
+            jtfUsu.setText("");
+            jpfSenha.setText("");
+            jtfPerfil.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo está vazio!");
+        }
+    }//GEN-LAST:event_jbtCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,8 +203,9 @@ public class TelaCadLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jbtCadastrar;
+    private javax.swing.JPasswordField jpfSenha;
     private javax.swing.JTextField jtfPerfil;
-    private javax.swing.JTextField jtfSenha;
     private javax.swing.JTextField jtfUsu;
     // End of variables declaration//GEN-END:variables
 }
