@@ -24,7 +24,7 @@ public class Usuario {
         this.senha = senha;
         this.perfil = perfil;
     }
-    
+
     public Usuario(String id, String nome, String senha, String perfil) {
         this.id = id;
         this.nome = nome;

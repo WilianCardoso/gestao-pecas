@@ -13,8 +13,9 @@ import javax.swing.JOptionPane;
  * @author cardo
  */
 public class TelaCadLogin extends javax.swing.JFrame {
-    
+
     private Usuario usuario;
+
     /**
      * Creates new form TelaCadLogin
      */
@@ -40,6 +41,7 @@ public class TelaCadLogin extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jpfSenha = new javax.swing.JPasswordField();
         jbtCadastrar = new javax.swing.JButton();
+        jbtVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +76,13 @@ public class TelaCadLogin extends javax.swing.JFrame {
             }
         });
 
+        jbtVoltar.setText("Voltar");
+        jbtVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -95,20 +104,28 @@ public class TelaCadLogin extends javax.swing.JFrame {
                             .addComponent(jtfPerfil))))
                 .addContainerGap(66, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbtVoltar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)
                         .addGap(74, 74, 74))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jbtCadastrar)
                         .addGap(146, 146, 146))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jbtVoltar)))
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -150,7 +167,7 @@ public class TelaCadLogin extends javax.swing.JFrame {
 
     private void jbtCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCadastrarActionPerformed
         // TODO add your handling code here:
-         if (!jtfUsu.getText().isBlank() && !jpfSenha.getText().isBlank() && !jtfPerfil.getText().isBlank()) {
+        if (!jtfUsu.getText().isBlank() && !jpfSenha.getText().isBlank() && !jtfPerfil.getText().isBlank()) {
             UsuarioDAO dao = new UsuarioDAO();
             usuario = new Usuario(jtfUsu.getText(), jpfSenha.getText(), jtfPerfil.getText());
             dao.cadastrarUsu(usuario);
@@ -161,6 +178,13 @@ public class TelaCadLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Campo está vazio!");
         }
     }//GEN-LAST:event_jbtCadastrarActionPerformed
+
+    private void jbtVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtVoltarActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        TelaLogin tela = new TelaLogin();
+        tela.setVisible(true);
+    }//GEN-LAST:event_jbtVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,6 +228,7 @@ public class TelaCadLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbtCadastrar;
+    private javax.swing.JButton jbtVoltar;
     private javax.swing.JPasswordField jpfSenha;
     private javax.swing.JTextField jtfPerfil;
     private javax.swing.JTextField jtfUsu;

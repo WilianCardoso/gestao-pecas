@@ -4,6 +4,10 @@
  */
 package Telas;
 
+import DAO.UsuarioDAO;
+import gestaopecas.Usuario;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author wilian_g_cardoso
@@ -24,12 +28,13 @@ public class TelaLogin extends javax.swing.JFrame {
         jtfUsu = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jbtLogin = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jpfSenha = new javax.swing.JPasswordField();
         jbtCad = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
@@ -81,7 +86,7 @@ public class TelaLogin extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(14, 14, 14)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jpfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(27, 27, 27)
@@ -104,7 +109,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jpfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtLogin)
@@ -116,7 +121,7 @@ public class TelaLogin extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,6 +137,37 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void jbtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtLoginActionPerformed
         // TODO add your handling code here:
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        String nome = jtfUsu.getText().trim();
+        String senha = new String(jpfSenha.getPassword());
+        //Validar o Usuário
+        Usuario usuario = usuarioDAO.logar(nome, senha);
+
+        if (usuario != null) {
+            // Verificar o perfil
+            String perfil = usuario.getPerfil();
+
+            JOptionPane.showMessageDialog(null, "Usuario " + usuario.getNome() + " logado com sucesso!");
+            dispose();
+            TelaPrincipal tela = new TelaPrincipal();
+            if ("adm".equals(perfil)) {
+                 JOptionPane.showMessageDialog(null, "Bem-vindo, Administrador!");
+                tela.habilitarModoAdministrador();
+            } else if ("fun".equals(perfil)) {
+                  JOptionPane.showMessageDialog(null, "Bem-vindo, Funcionário!");
+                tela.habilitarModoFuncionario();
+            } else {
+                JOptionPane.showMessageDialog(null, "Perfil desconhecido. Contate o administrador do sistema.");
+                return; // Para evitar que prossiga com um perfil inválido
+            }
+            tela.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuário ou senha inválido!");
+            TelaLogin telaLogin = new TelaLogin();
+            telaLogin.setVisible(true);
+            this.dispose();
+
+        }
     }//GEN-LAST:event_jbtLoginActionPerformed
 
     private void jbtCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCadActionPerformed
@@ -181,9 +217,9 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JButton jbtCad;
     private javax.swing.JButton jbtLogin;
+    private javax.swing.JPasswordField jpfSenha;
     private javax.swing.JTextField jtfUsu;
     // End of variables declaration//GEN-END:variables
 }

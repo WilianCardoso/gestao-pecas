@@ -24,21 +24,20 @@ public class UsuarioDAO {
     public UsuarioDAO() {
         this.con = new ConexaoBanco().getConexao();
     }
-    
-    public Usuario logar(String nome, String senha, String perfil) {
-        Usuario usuario = null;
-        String sql = "select * from usuario where nome = ? and senha = ? and perfil = ?";
 
+    public Usuario logar(String nome, String senha) {
+        Usuario usuario = null;
+        String sql = "select * from usuario where nome = ? and senha = ?";
+        
         try (Connection connection = new ConexaoBanco().getConexao(); PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, nome);
             stmt.setString(2, senha);
-            stmt.setString(4, perfil);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     usuario = new Usuario();
                     usuario.setNome(rs.getString("nome"));
                     usuario.setSenha(rs.getString("senha"));
-                    usuario.setSenha(rs.getString("perfil"));
+                    usuario.setPerfil(rs.getString("perfil"));
                 }
             }
         } catch (SQLException e) {
@@ -46,7 +45,7 @@ public class UsuarioDAO {
         }
         return usuario;
     }
-    
+
     public void cadastrarUsu(Usuario usuario) {
         String sql = "insert into usuario(nome,senha,perfil)values(?,?,?)";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
