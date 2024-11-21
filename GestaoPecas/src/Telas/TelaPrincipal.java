@@ -33,6 +33,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmCad = new javax.swing.JMenu();
         jmiCadPeca = new javax.swing.JMenuItem();
         jmiCadForn = new javax.swing.JMenuItem();
+        jmiCadUsu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,6 +73,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmiCadForn.setText("Cadastrar Fornecedor");
         jmCad.add(jmiCadForn);
 
+        jmiCadUsu.setText("Cadastrar Usuário");
+        jmiCadUsu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCadUsuActionPerformed(evt);
+            }
+        });
+        jmCad.add(jmiCadUsu);
+
         jMenuBar1.add(jmCad);
 
         setJMenuBar(jMenuBar1);
@@ -101,6 +110,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         TelaCadPeca tela = new TelaCadPeca();
         tela.setVisible(true);
     }//GEN-LAST:event_jmiCadPecaActionPerformed
+
+    private void jmiCadUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadUsuActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        TelaCadLogin tela = new TelaCadLogin();
+        tela.setVisible(true);
+    }//GEN-LAST:event_jmiCadUsuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,15 +152,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
     }
-    public void habilitarModoAdministrador() {
-  //  menuAdmin.setEnabled(true);  // Habilitar funcionalidades de administrador
-   // menuRelatorios.setEnabled(true); 
-}
 
-public void habilitarModoFuncionario() {
-   // menuAdmin.setEnabled(false); // Restringir funcionalidades de administrador
-   // menuRelatorios.setEnabled(false);
-}
+    public void habilitarModoAdministrador() {
+        //  menuAdmin.setEnabled(true);  // Habilitar funcionalidades de administrador
+
+    }
+    
+    public void habilitarModoFuncionario() {
+        jmiCadUsu.setEnabled(false); // Restringir funcionalidades de administrador
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
@@ -152,6 +169,7 @@ public void habilitarModoFuncionario() {
     private javax.swing.JMenu jmSair;
     private javax.swing.JMenuItem jmiCadForn;
     private javax.swing.JMenuItem jmiCadPeca;
+    private javax.swing.JMenuItem jmiCadUsu;
     private javax.swing.JMenuItem jmiSair;
     // End of variables declaration//GEN-END:variables
 }
