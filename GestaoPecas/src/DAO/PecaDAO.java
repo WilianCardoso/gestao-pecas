@@ -28,7 +28,7 @@ public class PecaDAO {
         public void cadastrarPeca(Peca peca) {
         String sql = "insert into peca(codigo,nome,qtdEstoque,preco)values(?,?,?,?)";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(2,peca.getCod());
+            ps.setString(1,peca.getCod());
             ps.setString(2, peca.getNome());
             ps.setInt(3, peca.getQntdEstoque());
             ps.setDouble(4, peca.getPreco());
@@ -37,7 +37,7 @@ public class PecaDAO {
             ps.close();
             JOptionPane.showMessageDialog(null, "Peça Cadastrada!");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao adicionar peça!");
+            JOptionPane.showMessageDialog(null, "Erro ao Cadastrar peça!");
         }
     }
 }
