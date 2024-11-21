@@ -37,7 +37,7 @@ public class UsuarioDAO {
                     usuario = new Usuario();
                     usuario.setNome(rs.getString("nome"));
                     usuario.setSenha(rs.getString("senha"));
-                    usuario.setPerfil(rs.getString("perfil"));
+                    usuario.setPerfil(rs.getString("tipo_usuario"));
                 }
             }
         } catch (SQLException e) {
@@ -47,11 +47,11 @@ public class UsuarioDAO {
     }
 
     public void cadastrarUsu(Usuario usuario) {
-        String sql = "insert into usuario(nome,senha,perfil)values(?,?,?)";
+        String sql = "insert into usuario(nome,senha,tipo_usuario)values(?,?,?)";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, usuario.getNome());
             ps.setString(2, usuario.getSenha());
-            ps.setString(3, usuario.getPerfil());
+            ps.setString(3, usuario.gettipo_usuario());
 
             ps.execute();
             ps.close();

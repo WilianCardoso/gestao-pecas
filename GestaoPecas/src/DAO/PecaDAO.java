@@ -26,7 +26,7 @@ public class PecaDAO {
     }
     
         public void cadastrarPeca(Peca peca) {
-        String sql = "insert into peca(codigo,nome,qtdEstoque,preco)values(?,?,?,?)";
+        String sql = "insert into peca(codigo,nome,qtd_estoque,preco)values(?,?,?,?)";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1,peca.getCod());
             ps.setString(2, peca.getNome());

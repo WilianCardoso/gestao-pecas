@@ -13,23 +13,23 @@ public class Usuario {
     private String id;
     private String nome;
     private String senha;
-    private String perfil;
+    private String tipo_usuario;
 
     public Usuario() {
 
     }
 
-    public Usuario(String nome, String senha, String perfil) {
+    public Usuario(String nome, String senha, String tipo_usuario) {
         this.nome = nome;
         this.senha = senha;
-        this.perfil = perfil;
+        this.tipo_usuario = tipo_usuario;
     }
 
-    public Usuario(String id, String nome, String senha, String perfil) {
+    public Usuario(String id, String nome, String senha, String tipo_usuario) {
         this.id = id;
         this.nome = nome;
         this.senha = senha;
-        this.perfil = perfil;
+        this.tipo_usuario = tipo_usuario;
     }
 
     public String getId() {
@@ -56,12 +56,12 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public String getPerfil() {
-        return perfil;
+    public String gettipo_usuario() {
+        return tipo_usuario;
     }
 
-    public void setPerfil(String perfil) {
-        this.perfil = perfil;
+    public void setPerfil(String tipo_usuario) {
+        this.tipo_usuario = tipo_usuario;
     }
 
 }

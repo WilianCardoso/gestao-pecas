@@ -151,7 +151,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         if (usuario != null) {
             // Verificar o perfil
-            String perfil = usuario.getPerfil();
+            String perfil = usuario.gettipo_usuario();
 
             JOptionPane.showMessageDialog(null, "Usuario " + usuario.getNome() + " logado com sucesso!");
             dispose();
