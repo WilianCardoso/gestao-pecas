@@ -177,12 +177,16 @@ public class TelaCadLogin extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Campo está vazio!");
         }
+        
+        dispose();
+        TelaLogin tela = new TelaLogin();
+        tela.setVisible(true);
     }//GEN-LAST:event_jbtCadastrarActionPerformed
 
     private void jbtVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtVoltarActionPerformed
         // TODO add your handling code here:
         dispose();
-        TelaLogin tela = new TelaLogin();
+        TelaPrincipal tela = new TelaPrincipal();
         tela.setVisible(true);
     }//GEN-LAST:event_jbtVoltarActionPerformed
 

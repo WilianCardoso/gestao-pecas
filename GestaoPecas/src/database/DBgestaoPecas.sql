@@ -12,7 +12,7 @@ CREATE TABLE peca (
     id INTEGER NOT NULL AUTO_INCREMENT,
     codigo INTEGER NOT NULL UNIQUE,
     nome VARCHAR(45) NOT NULL,
-    qtd_estoque INTEGER NOT NULL CHECK (qtd_estoque >= 0)
+    qtd_estoque INTEGER NOT NULL CHECK (qtd_estoque >= 0),
     preco DOUBLE NOT NULL CHECK (preco >= 0),
     PRIMARY KEY (id)
 );
