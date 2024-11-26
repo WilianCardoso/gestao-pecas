@@ -71,6 +71,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmCad.add(jmiCadPeca);
 
         jmiCadForn.setText("Cadastrar Fornecedor");
+        jmiCadForn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCadFornActionPerformed(evt);
+            }
+        });
         jmCad.add(jmiCadForn);
 
         jmiCadUsu.setText("Cadastrar Usuário");
@@ -117,6 +122,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         TelaCadLogin tela = new TelaCadLogin();
         tela.setVisible(true);
     }//GEN-LAST:event_jmiCadUsuActionPerformed
+
+    private void jmiCadFornActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadFornActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        TelaCadForn tela = new TelaCadForn();
+        tela.setVisible(true);
+    }//GEN-LAST:event_jmiCadFornActionPerformed
 
     /**
      * @param args the command line arguments

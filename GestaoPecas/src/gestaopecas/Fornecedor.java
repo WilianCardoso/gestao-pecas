@@ -11,15 +11,45 @@ package gestaopecas;
 public class Fornecedor {
     private String id;
     private String nome;
-    private String contato;
+    private int cnpj_cpf;
+    private int telefone;
+    private String email;
     private String endereco;
 
-    public Fornecedor(String id, String nome, String contato, String endereco) {
+    public Fornecedor(String id, String nome, int cnpj_cpf, int telefone, String email, String endereco) {
         this.id = id;
         this.nome = nome;
-        this.contato = contato;
+        this.cnpj_cpf = cnpj_cpf;
+        this.telefone = telefone;
+        this.email = email;
         this.endereco = endereco;
     }
+    
+    public int getCnpj_cpf() {
+        return cnpj_cpf;
+    }
+
+    public void setCnpj_cpf(int cnpj_cpf) {
+        this.cnpj_cpf = cnpj_cpf;
+    }
+
+    public int getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(int telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    
     public Fornecedor() {        
     }
 
@@ -37,14 +67,6 @@ public class Fornecedor {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getContato() {
-        return contato;
-    }
-
-    public void setContato(String contato) {
-        this.contato = contato;
     }
 
     public String getEndereco() {

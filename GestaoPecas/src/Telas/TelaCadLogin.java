@@ -15,11 +15,15 @@ import javax.swing.JOptionPane;
 public class TelaCadLogin extends javax.swing.JFrame {
 
     private Usuario usuario;
+    private String origem;
+    private String anterior;
+    
 
     /**
      * Creates new form TelaCadLogin
      */
     public TelaCadLogin() {
+        this.origem = origem;
         initComponents();
     }
 
@@ -177,7 +181,7 @@ public class TelaCadLogin extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Campo está vazio!");
         }
-        
+
         dispose();
         TelaLogin tela = new TelaLogin();
         tela.setVisible(true);
@@ -185,9 +189,15 @@ public class TelaCadLogin extends javax.swing.JFrame {
 
     private void jbtVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtVoltarActionPerformed
         // TODO add your handling code here:
+        // Verificar a origem e redirecionar para a tela correspondente
+        if ("TelaCadlogin".equals(origem)) {
+            TelaLogin telaLogin = new TelaLogin();
+            telaLogin.setVisible(true);
+        } else if ("TelaPrincipal".equals(origem)) {
+            TelaPrincipal telaPrincipal = new TelaPrincipal();
+            telaPrincipal.setVisible(true);
+        }
         dispose();
-        TelaPrincipal tela = new TelaPrincipal();
-        tela.setVisible(true);
     }//GEN-LAST:event_jbtVoltarActionPerformed
 
     /**
