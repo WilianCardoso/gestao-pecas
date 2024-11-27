@@ -30,6 +30,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jmSair = new javax.swing.JMenu();
         jmiSair = new javax.swing.JMenuItem();
+        jmiLogoff = new javax.swing.JMenuItem();
         jmCad = new javax.swing.JMenu();
         jmiCadPeca = new javax.swing.JMenuItem();
         jmiCadForn = new javax.swing.JMenuItem();
@@ -57,6 +58,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         jmSair.add(jmiSair);
+
+        jmiLogoff.setText("Logoff");
+        jmiLogoff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiLogoffActionPerformed(evt);
+            }
+        });
+        jmSair.add(jmiLogoff);
 
         jMenuBar1.add(jmSair);
 
@@ -118,9 +127,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jmiCadUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadUsuActionPerformed
         // TODO add your handling code here:
-        dispose();
-        TelaCadLogin tela = new TelaCadLogin();
+        TelaCadLogin tela = new TelaCadLogin("principal"); // Define a origem como "principal"
         tela.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jmiCadUsuActionPerformed
 
     private void jmiCadFornActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadFornActionPerformed
@@ -129,6 +138,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         TelaCadForn tela = new TelaCadForn();
         tela.setVisible(true);
     }//GEN-LAST:event_jmiCadFornActionPerformed
+
+    private void jmiLogoffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiLogoffActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        TelaLogin tela = new TelaLogin();
+        tela.setVisible(true);
+    }//GEN-LAST:event_jmiLogoffActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,10 +185,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         //  menuAdmin.setEnabled(true);  // Habilitar funcionalidades de administrador
 
     }
-    
+
     public void habilitarModoFuncionario() {
         jmiCadUsu.setEnabled(false); // Restringir funcionalidades de administrador
-        
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
@@ -182,6 +198,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiCadForn;
     private javax.swing.JMenuItem jmiCadPeca;
     private javax.swing.JMenuItem jmiCadUsu;
+    private javax.swing.JMenuItem jmiLogoff;
     private javax.swing.JMenuItem jmiSair;
     // End of variables declaration//GEN-END:variables
 }

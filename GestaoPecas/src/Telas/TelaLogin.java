@@ -157,10 +157,10 @@ public class TelaLogin extends javax.swing.JFrame {
             dispose();
             TelaPrincipal tela = new TelaPrincipal();
             if ("adm".equals(perfil)) {
-                 JOptionPane.showMessageDialog(null, "Bem-vindo, Administrador!");
+                JOptionPane.showMessageDialog(null, "Bem-vindo, Administrador!");
                 tela.habilitarModoAdministrador();
             } else if ("fun".equals(perfil)) {
-                  JOptionPane.showMessageDialog(null, "Bem-vindo, Funcionário!");
+                JOptionPane.showMessageDialog(null, "Bem-vindo, Funcionário!");
                 tela.habilitarModoFuncionario();
             } else {
                 JOptionPane.showMessageDialog(null, "Perfil desconhecido. Contate o administrador do sistema.");
@@ -179,7 +179,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private void jbtCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCadActionPerformed
         // TODO add your handling code here:
         dispose();
-        TelaCadLogin tela = new TelaCadLogin();
+        TelaCadLogin tela = new TelaCadLogin("TelaLogin");
         tela.setVisible(true);
     }//GEN-LAST:event_jbtCadActionPerformed
 

@@ -15,15 +15,17 @@ import javax.swing.JOptionPane;
 public class TelaCadLogin extends javax.swing.JFrame {
 
     private Usuario usuario;
-    private String origem;
-    private String anterior;
-    
+    private String origem = "TelaLogin";
 
     /**
      * Creates new form TelaCadLogin
      */
-    public TelaCadLogin() {
-        this.origem = origem;
+    public TelaCadLogin(String origem) {
+        this.origem = origem; // Define a origem do usuário
+        initComponents();
+    }
+
+    private TelaCadLogin() {
         initComponents();
     }
 
@@ -46,6 +48,7 @@ public class TelaCadLogin extends javax.swing.JFrame {
         jpfSenha = new javax.swing.JPasswordField();
         jbtCadastrar = new javax.swing.JButton();
         jbtVoltar = new javax.swing.JButton();
+        jbtListar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,6 +90,13 @@ public class TelaCadLogin extends javax.swing.JFrame {
             }
         });
 
+        jbtListar.setText("Listar");
+        jbtListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtListarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -104,21 +114,19 @@ public class TelaCadLogin extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jbtCadastrar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbtListar))
                             .addComponent(jpfSenha)
                             .addComponent(jtfPerfil))))
                 .addContainerGap(66, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jbtVoltar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
-                        .addGap(74, 74, 74))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jbtCadastrar)
-                        .addGap(146, 146, 146))))
+                .addComponent(jbtVoltar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(74, 74, 74))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,9 +150,11 @@ public class TelaCadLogin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jtfPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(jbtCadastrar)
-                .addGap(25, 25, 25))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtCadastrar)
+                    .addComponent(jbtListar))
+                .addGap(28, 28, 28))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -190,15 +200,19 @@ public class TelaCadLogin extends javax.swing.JFrame {
     private void jbtVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtVoltarActionPerformed
         // TODO add your handling code here:
         // Verificar a origem e redirecionar para a tela correspondente
-        if ("TelaCadlogin".equals(origem)) {
-            TelaLogin telaLogin = new TelaLogin();
-            telaLogin.setVisible(true);
-        } else if ("TelaPrincipal".equals(origem)) {
-            TelaPrincipal telaPrincipal = new TelaPrincipal();
-            telaPrincipal.setVisible(true);
+        if ("TelaLogin".equals(origem)) {
+            TelaLogin tela = new TelaLogin();
+            tela.setVisible(true);
+        } else if ("principal".equals(origem)) {
+            TelaPrincipal tela = new TelaPrincipal();
+            tela.setVisible(true);
         }
         dispose();
     }//GEN-LAST:event_jbtVoltarActionPerformed
+
+    private void jbtListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtListarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtListarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,6 +256,7 @@ public class TelaCadLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbtCadastrar;
+    private javax.swing.JButton jbtListar;
     private javax.swing.JButton jbtVoltar;
     private javax.swing.JPasswordField jpfSenha;
     private javax.swing.JTextField jtfPerfil;

@@ -4,7 +4,7 @@ CREATE TABLE usuario(
     ID INTEGER NOT NULL AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
-    tipo_usuario ENUM('adm', 'funcionario')  NOT NULL, 
+    tipo_usuario ENUM('Adm', 'Funcionario')  NOT NULL, 
     PRIMARY KEY (id)
 );
 
