@@ -159,7 +159,7 @@ public class TelaLogin extends javax.swing.JFrame {
             if ("adm".equals(perfil)) {
                 JOptionPane.showMessageDialog(null, "Bem-vindo, Administrador!");
                 tela.habilitarModoAdministrador();
-            } else if ("fun".equals(perfil)) {
+            } else if ("funcionario".equals(perfil)) {
                 JOptionPane.showMessageDialog(null, "Bem-vindo, Funcionário!");
                 tela.habilitarModoFuncionario();
             } else {
@@ -177,10 +177,21 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtLoginActionPerformed
 
     private void jbtCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCadActionPerformed
-        // TODO add your handling code here:
-        dispose();
-        TelaCadLogin tela = new TelaCadLogin("TelaLogin");
-        tela.setVisible(true);
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        String nome = jtfUsu.getText().trim();
+        String senha = new String(jpfSenha.getPassword());
+        Usuario usuario = usuarioDAO.logar(nome, senha);
+
+        String perfil = usuario.gettipo_usuario();
+
+        if ("funcionario".equals(perfil)) {
+            JOptionPane.showMessageDialog(this, "Funcionário não tem acesso ao cadastro de usuários");
+        } else {
+            dispose();
+            TelaCadLogin tela = new TelaCadLogin("TelaLogin");
+            tela.setVisible(true);
+        }
+
     }//GEN-LAST:event_jbtCadActionPerformed
 
     /**
