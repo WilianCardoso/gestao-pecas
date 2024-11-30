@@ -1,11 +1,11 @@
 CREATE SCHEMA db_gestao_pecas ;
 
-CREATE TABLE usuario(
+CREATE TABLE usuario (
     ID INTEGER NOT NULL AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
-    tipo_usuario ENUM('adm', 'funcionario')  NOT NULL, 
-    PRIMARY KEY (id)
+    tipo_usuario BOOLEAN NOT NULL, -- TRUE para administrador, FALSE para funcionário
+    PRIMARY KEY (ID)
 );
 
 CREATE TABLE peca (
@@ -47,5 +47,7 @@ CREATE TABLE hist_mov (
     FOREIGN KEY (peca_id) REFERENCES peca(id),
     FOREIGN KEY (fornecedor_id) REFERENCES fornecedor(id)
 );
+
+INSERT INTO db_gestao_pecas.usuario(nome, senha, tipo_usuario) VALUES ("admin","123","adm")
 
 

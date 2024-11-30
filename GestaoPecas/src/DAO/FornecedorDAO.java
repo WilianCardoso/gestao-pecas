@@ -34,9 +34,9 @@ public class FornecedorDAO {
             
             ps.execute();
             ps.close();
-            JOptionPane.showMessageDialog(null, "Peça Fornecedor Cadastrado!");
+            JOptionPane.showMessageDialog(null, "Fornecedor Cadastrado com sucesso!");
             } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao Cadastrar peça!");
+            JOptionPane.showMessageDialog(null, "Erro ao Cadastrar fornecedor!");
         }
     }
 }

@@ -37,7 +37,7 @@ public class UsuarioDAO {
                     usuario = new Usuario();
                     usuario.setNome(rs.getString("nome"));
                     usuario.setSenha(rs.getString("senha"));
-                    usuario.setPerfil(rs.getString("tipo_usuario"));
+                    usuario.setTipo_usuario(rs.getBoolean("tipo_usuario"));
                 }
             }
         } catch (SQLException e) {
@@ -51,7 +51,7 @@ public class UsuarioDAO {
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, usuario.getNome());
             ps.setString(2, usuario.getSenha());
-            ps.setString(3, usuario.gettipo_usuario());
+            ps.setBoolean(3, usuario.isTipo_usuario());
 
             ps.execute();
             ps.close();

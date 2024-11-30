@@ -6,6 +6,7 @@ package Telas;
 
 import DAO.UsuarioDAO;
 import gestaopecas.Usuario;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,6 +28,9 @@ public class TelaCadLogin extends javax.swing.JFrame {
 
     private TelaCadLogin() {
         initComponents();
+        bgTipoUsuario = new ButtonGroup();
+        bgTipoUsuario.add(jrbAdmin);
+        bgTipoUsuario.add(jrbFunc);
     }
 
     /**
@@ -43,14 +47,16 @@ public class TelaCadLogin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jtfUsu = new javax.swing.JTextField();
-        jtfPerfil = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jpfSenha = new javax.swing.JPasswordField();
         jbtCadastrar = new javax.swing.JButton();
         jbtVoltar = new javax.swing.JButton();
         jbtListar = new javax.swing.JButton();
+        jrbAdmin = new javax.swing.JRadioButton();
+        jrbFunc = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de Usuário");
 
         jLabel1.setFont(new java.awt.Font("JetBrains Mono NL Light", 0, 14)); // NOI18N
         jLabel1.setText("Usuário");
@@ -97,6 +103,15 @@ public class TelaCadLogin extends javax.swing.JFrame {
             }
         });
 
+        jrbAdmin.setText("Administrador");
+        jrbAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbAdminActionPerformed(evt);
+            }
+        });
+
+        jrbFunc.setText("Funcionário");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -119,7 +134,11 @@ public class TelaCadLogin extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jbtListar))
                             .addComponent(jpfSenha)
-                            .addComponent(jtfPerfil))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jrbAdmin)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jrbFunc)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap(66, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -146,10 +165,11 @@ public class TelaCadLogin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jpfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jtfPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jrbAdmin)
+                    .addComponent(jrbFunc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtCadastrar)
@@ -169,6 +189,7 @@ public class TelaCadLogin extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfUsuActionPerformed
@@ -180,25 +201,40 @@ public class TelaCadLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jpfSenhaActionPerformed
 
     private void jbtCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCadastrarActionPerformed
-        // TODO add your handling code here:
-        if (!jtfUsu.getText().isBlank() && !jpfSenha.getText().isBlank() && !jtfPerfil.getText().isBlank()) {
-            UsuarioDAO dao = new UsuarioDAO();
-            usuario = new Usuario(jtfUsu.getText(), jpfSenha.getText(), jtfPerfil.getText());
-            dao.cadastrarUsu(usuario);
-            jtfUsu.setText("");
-            jpfSenha.setText("");
-            jtfPerfil.setText("");
-        } else {
-            JOptionPane.showMessageDialog(null, "Campo está vazio!");
+       
+        // Verificar se os campos estão preenchidos corretamente
+        if (jtfUsu.getText().isBlank() || jpfSenha.getText().isBlank() || (!jrbAdmin.isSelected() && !jrbFunc.isSelected())) {
+            // Exibir mensagem de erro se algum campo estiver vazio ou nenhum botão de rádio estiver selecionado
+            JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos e um tipo de usuário deve ser selecionado!");
+            return; // Interrompe a execução 
         }
 
+        // Criar o tipo de usuário com base nos botões de rádio selecionados
+        boolean tipoUsuario = jrbAdmin.isSelected(); // Admin = true, Funcionário = false
+
+        // Criar o usuário com as informações fornecidas
+        Usuario usuario = new Usuario(jtfUsu.getText(), jpfSenha.getText(), tipoUsuario);
+
+        // Chamar o método de cadastro
+        UsuarioDAO dao = new UsuarioDAO();
+        dao.cadastrarUsu(usuario);
+
+        // Limpar os campos após o cadastro
+        jtfUsu.setText("");
+        jpfSenha.setText("");
+        bgTipoUsuario.clearSelection(); // Limpa a seleção do grupo de botões
+
+        // Exibir uma mensagem de sucesso
+        JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+
+        // Redirecionar para a tela de login
         dispose();
         TelaLogin tela = new TelaLogin();
         tela.setVisible(true);
     }//GEN-LAST:event_jbtCadastrarActionPerformed
 
     private void jbtVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtVoltarActionPerformed
-        // TODO add your handling code here:
+
         // Verificar a origem e redirecionar para a tela correspondente
         if ("TelaLogin".equals(origem)) {
             TelaLogin tela = new TelaLogin();
@@ -212,7 +248,14 @@ public class TelaCadLogin extends javax.swing.JFrame {
 
     private void jbtListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtListarActionPerformed
         // TODO add your handling code here:
+        dispose();
+        TelaListar tela = new TelaListar();
+        tela.setVisible(true);
     }//GEN-LAST:event_jbtListarActionPerformed
+
+    private void jrbAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbAdminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbAdminActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,7 +291,7 @@ public class TelaCadLogin extends javax.swing.JFrame {
             }
         });
     }
-
+    private javax.swing.ButtonGroup bgTipoUsuario;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -259,7 +302,8 @@ public class TelaCadLogin extends javax.swing.JFrame {
     private javax.swing.JButton jbtListar;
     private javax.swing.JButton jbtVoltar;
     private javax.swing.JPasswordField jpfSenha;
-    private javax.swing.JTextField jtfPerfil;
+    private javax.swing.JRadioButton jrbAdmin;
+    private javax.swing.JRadioButton jrbFunc;
     private javax.swing.JTextField jtfUsu;
     // End of variables declaration//GEN-END:variables
 }
