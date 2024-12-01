@@ -57,8 +57,18 @@ public class TelaListar extends javax.swing.JFrame {
         setTitle("Tela de Listagem");
 
         jbtAlterar.setText("Alterar");
+        jbtAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtAlterarActionPerformed(evt);
+            }
+        });
 
         jbtExcluir.setText("Excluir");
+        jbtExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtExcluirActionPerformed(evt);
+            }
+        });
 
         jbtVoltar.setText("Voltar");
         jbtVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -167,7 +177,6 @@ public class TelaListar extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Não há usuários cadastrados no sistema.");
                 return;
             }
-
             for (Usuario usuario : usuarios) {
                 modelo.addRow(new Object[]{
                     usuario.getId(),
@@ -181,9 +190,7 @@ public class TelaListar extends javax.swing.JFrame {
                     new Object[][]{},
                     new String[]{"Código", "Nome", "Quantidade", "Preço"}
             );
-
             jtbListar.setModel(modelo);
-
             PecaDAO pecaDAO = new PecaDAO();
             List<Peca> pecas = pecaDAO.getPecas();
 
@@ -191,7 +198,6 @@ public class TelaListar extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Não há peças cadastradas no sistema.");
                 return;
             }
-
             for (Peca peca : pecas) {
                 modelo.addRow(new Object[]{
                     peca.getCod(),
@@ -205,9 +211,7 @@ public class TelaListar extends javax.swing.JFrame {
                     new Object[][]{},
                     new String[]{"ID", "Nome", "CNPJ/CPF", "Telefone", "Email", "Endereço"}
             );
-
             jtbListar.setModel(modelo);
-
             FornecedorDAO fornecedorDAO = new FornecedorDAO();
             List<Fornecedor> fornecedores = fornecedorDAO.getFornecedores();
 
@@ -235,6 +239,74 @@ public class TelaListar extends javax.swing.JFrame {
         TelaPrincipal tela = new TelaPrincipal();
         tela.setVisible(true);
     }//GEN-LAST:event_jbtVoltarActionPerformed
+
+    private void jbtExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtExcluirActionPerformed
+        // TODO add your handling code here:
+        int linhaSelecionada = jtbListar.getSelectedRow(); // Obtém a linha selecionada
+        if (linhaSelecionada == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um registro para excluir.");
+            return; // Interrompe se nenhuma linha for selecionada
+        }
+
+        // Obtém o ID (primeira coluna da tabela, que deve ser o ID)
+        int id = Integer.parseInt(jtbListar.getValueAt(linhaSelecionada, 0).toString());
+
+        // Verifica a origem e executa a exclusão
+        if ("usuario".equals(origem)) {
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            usuarioDAO.excluirUsuario(id); // Método que exclui o usuário
+        } else if ("peca".equals(origem)) {
+            PecaDAO pecaDAO = new PecaDAO();
+            pecaDAO.excluirPeca(id); // Método que exclui a peça
+        } else if ("fornecedor".equals(origem)) {
+            FornecedorDAO fornecedorDAO = new FornecedorDAO();
+            fornecedorDAO.excluirFornecedor(id); // Método que exclui o fornecedor
+        }
+
+    }//GEN-LAST:event_jbtExcluirActionPerformed
+
+    private void jbtAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAlterarActionPerformed
+        // TODO add your handling code here:
+        int linhaSelecionada = jtbListar.getSelectedRow(); // Obtém a linha selecionada
+        if (linhaSelecionada == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um registro para alterar.");
+            return; // Interrompe se nenhuma linha for selecionada
+        }
+
+        // Desbloqueia as células para edição
+        jtbListar.setEnabled(true); // Permite editar a tabela
+        jbtAlterar.addActionListener(e -> atualizarRegistro(linhaSelecionada)); // Ação de atualização
+    }//GEN-LAST:event_jbtAlterarActionPerformed
+
+    private void atualizarRegistro(int linhaSelecionada) {
+        // Obtém os dados da linha selecionada
+        int id = Integer.parseInt(jtbListar.getValueAt(linhaSelecionada, 0).toString());
+        String nome = jtbListar.getValueAt(linhaSelecionada, 1).toString();
+
+        // Verifica a origem e chama o método de atualização correspondente
+        if ("usuario".equals(origem)) {
+            String senha = jtbListar.getValueAt(linhaSelecionada, 2).toString();
+            boolean tipoUsuario = "Admin".equals(jtbListar.getValueAt(linhaSelecionada, 3).toString());
+
+            // Atualiza no banco de dados
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            usuarioDAO.alterarUsuario(id, nome, senha, tipoUsuario);
+        } else if ("peca".equals(origem)) {
+            int quantidade = Integer.parseInt(jtbListar.getValueAt(linhaSelecionada, 2).toString());
+
+            // Atualiza no banco de dados
+            PecaDAO pecaDAO = new PecaDAO();
+            pecaDAO.alterarPeca(nome, quantidade);
+        } else if ("fornecedor".equals(origem)) {
+            String telefone = jtbListar.getValueAt(linhaSelecionada, 3).toString();
+            String email = jtbListar.getValueAt(linhaSelecionada, 4).toString();
+            String endereco = jtbListar.getValueAt(linhaSelecionada, 5).toString();
+
+            // Atualiza no banco de dados
+            FornecedorDAO fornecedorDAO = new FornecedorDAO();
+            fornecedorDAO.alterarFornecedor(nome, telefone, email, endereco);
+        }
+    }
 
     /**
      * @param args the command line arguments

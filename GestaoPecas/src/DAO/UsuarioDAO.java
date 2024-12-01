@@ -29,7 +29,7 @@ public class UsuarioDAO {
     public Usuario logar(String nome, String senha) {
         Usuario usuario = null;
         String sql = "select * from usuario where nome = ? and senha = ?";
-        
+
         try (Connection connection = new ConexaoBanco().getConexao(); PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, nome);
             stmt.setString(2, senha);
@@ -61,7 +61,7 @@ public class UsuarioDAO {
             JOptionPane.showMessageDialog(null, "Erro ao adicionar usuario!");
         }
     }
-    
+
     public ArrayList<Usuario> getUsuarios() {
         String SQL = "SELECT * FROM usuario";
         ArrayList<Usuario> usuarios = null;
@@ -85,4 +85,46 @@ public class UsuarioDAO {
         }
         return usuarios;
     }
+
+    public void alterarUsuario(int id, String nome, String senha, boolean tipo_usuario) {
+        String sql = "UPDATE usuario SET nome = ?, senha = ?, tipo_usuario = ? WHERE id = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, nome);
+            ps.setString(2, senha);
+            ps.setBoolean(3, tipo_usuario);
+            ps.setInt(4, id);
+            ps.execute();
+            ps.close();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao alterar o usuário: " + e.getMessage(), e);
+        }
+    }
+
+    public void excluirUsuario(int id) {
+        String sql = "DELETE FROM usuario WHERE id = ?";
+
+        // Usando try-with-resources para garantir o fechamento da conexão e do statement
+        try (Connection connection = new ConexaoBanco().getConexao(); PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            // Define o parâmetro (ID do usuário que será excluído)
+            ps.setInt(1, id);
+
+            // Executa a exclusão
+            int rowsAffected = ps.executeUpdate();
+
+            // Verifica se a exclusão foi bem-sucedida
+            if (rowsAffected > 0) {
+                System.out.println("Usuário excluído com sucesso!");
+            } else {
+                System.out.println("Nenhum usuário encontrado com o ID fornecido.");
+            }
+
+        } catch (SQLException e) {
+            // Exibe a mensagem de erro caso ocorra uma exceção
+            throw new RuntimeException("Erro ao excluir o usuário: " + e.getMessage(), e);
+        }
+    }
+
 }

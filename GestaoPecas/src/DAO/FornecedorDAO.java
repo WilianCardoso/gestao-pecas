@@ -18,37 +18,37 @@ import javax.swing.JOptionPane;
  * @author wilian_g_cardoso
  */
 public class FornecedorDAO {
+
     private Connection con;
     ResultSet rs;
     PreparedStatement pstm;
-    
-    public FornecedorDAO(){
-         this.con = new ConexaoBanco().getConexao();
+
+    public FornecedorDAO() {
+        this.con = new ConexaoBanco().getConexao();
     }
-    
-    public void cadastrarForn(Fornecedor fornecedor){
-         String sql = "insert into fornecedor(nome,cnpj_cpf,telefone,email, endereco)values(?,?,?,?,?)";
+
+    public void cadastrarForn(Fornecedor fornecedor) {
+        String sql = "insert into fornecedor(nome,cnpj_cpf,telefone,email, endereco)values(?,?,?,?,?)";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1,fornecedor.getNome());
-            ps.setInt(2,fornecedor.getCnpj_cpf());
-            ps.setInt(3,fornecedor.getTelefone());
-            ps.setString(4,fornecedor.getEmail());
-            ps.setString(5,fornecedor.getEndereco());
-            
+            ps.setString(1, fornecedor.getNome());
+            ps.setInt(2, fornecedor.getCnpj_cpf());
+            ps.setInt(3, fornecedor.getTelefone());
+            ps.setString(4, fornecedor.getEmail());
+            ps.setString(5, fornecedor.getEndereco());
+
             ps.execute();
             ps.close();
             JOptionPane.showMessageDialog(null, "Fornecedor Cadastrado com sucesso!");
-            } catch (Exception e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao Cadastrar fornecedor!");
         }
     }
-    
-     public ArrayList<Fornecedor> getFornecedores() {
+
+    public ArrayList<Fornecedor> getFornecedores() {
         String SQL = "SELECT * FROM fornecedor";
         ArrayList<Fornecedor> fornecedores = null;
 
-        try (Connection connection = new ConexaoBanco().getConexao();
-                PreparedStatement ps = connection.prepareStatement(SQL)) {
+        try (Connection connection = new ConexaoBanco().getConexao(); PreparedStatement ps = connection.prepareStatement(SQL)) {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     if (fornecedores == null) {
@@ -65,8 +65,49 @@ public class FornecedorDAO {
                 }
             }
         } catch (SQLException e) {
-             throw new RuntimeException("Erro ao obter lista de fornecedores: " + e.getMessage(), e);
+            throw new RuntimeException("Erro ao obter lista de fornecedores: " + e.getMessage(), e);
         }
         return fornecedores;
+    }
+
+    public void alterarFornecedor(String nome, String telefone, String email, String endereco) {
+        String sql = "UPDATE fornecedor SET nome = ?, telefone = ?, email = ?, endereco = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, nome);
+            ps.setString(2, telefone);
+            ps.setString(3, email);
+            ps.setString(4, endereco);
+            ps.execute();
+            ps.close();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao alterar o fornecedor: " + e.getMessage(), e);
+        }
+    }
+
+    public void excluirFornecedor(int id) {
+        String sql = "DELETE FROM fornecedor WHERE id = ?";
+
+        // Usando try-with-resources para garantir o fechamento da conexão e do statement
+        try (Connection connection = new ConexaoBanco().getConexao(); PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            // Define o parâmetro (ID do fornecedor que será excluído)
+            ps.setInt(1, id);
+
+            // Executa a exclusão
+            int rowsAffected = ps.executeUpdate();
+
+            // Verifica se a exclusão foi bem-sucedida
+            if (rowsAffected > 0) {
+                System.out.println("Fornecedor excluído com sucesso!");
+            } else {
+                System.out.println("Nenhum fornecedor encontrado com o ID fornecido.");
+            }
+
+        } catch (SQLException e) {
+            // Exibe a mensagem de erro caso ocorra uma exceção
+            throw new RuntimeException("Erro ao excluir o fornecedor: " + e.getMessage(), e);
+        }
     }
 }

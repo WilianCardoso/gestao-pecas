@@ -66,4 +66,42 @@ public class PecaDAO {
         }
         return pecas;
     }
+
+    public void alterarPeca(String nome, int qtd_estoque) {
+        String sql = "UPDATE peca SET nome = ?, qtd_estoque = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, nome);
+            ps.setInt(2, qtd_estoque);
+            ps.execute();
+            ps.close();
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao alterar o fornecedor: " + e.getMessage(), e);
+        }
+    }
+
+    public void excluirPeca(int id) {
+        String sql = "DELETE FROM peca WHERE id = ?";
+
+        // Usando try-with-resources para garantir o fechamento da conexão e do statement
+        try (Connection connection = new ConexaoBanco().getConexao(); PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            // Define o parâmetro (ID da peça que será excluída)
+            ps.setInt(1, id);
+
+            // Executa a exclusão
+            int rowsAffected = ps.executeUpdate();
+
+            // Verifica se a exclusão foi bem-sucedida
+            if (rowsAffected > 0) {
+                System.out.println("Peça excluída com sucesso!");
+            } else {
+                System.out.println("Nenhuma peça encontrada com o ID fornecido.");
+            }
+
+        } catch (SQLException e) {
+            // Exibe a mensagem de erro caso ocorra uma exceção
+            throw new RuntimeException("Erro ao excluir a peça: " + e.getMessage(), e);
+        }
+    }
 }
