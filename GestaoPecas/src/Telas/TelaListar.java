@@ -10,7 +10,6 @@ import DAO.UsuarioDAO;
 import gestaopecas.Fornecedor;
 import gestaopecas.Peca;
 import gestaopecas.Usuario;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -52,6 +51,7 @@ public class TelaListar extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jtbListar = new javax.swing.JTable();
         jbtListar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de Listagem");
@@ -78,9 +78,30 @@ public class TelaListar extends javax.swing.JFrame {
         });
 
         jbtRelatorio.setText("Relatório");
+        jbtRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtRelatorioActionPerformed(evt);
+            }
+        });
 
         jtbListar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -99,46 +120,47 @@ public class TelaListar extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Dubai Medium", 0, 24)); // NOI18N
+        jLabel1.setText("Listagem");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jbtVoltar))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(jbtRelatorio)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbtAlterar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbtExcluir)
-                                .addGap(29, 29, 29)
-                                .addComponent(jbtListar)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGap(40, 40, 40)
+                        .addComponent(jbtRelatorio)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtAlterar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtExcluir)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtListar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jbtVoltar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(163, 163, 163)
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jbtVoltar)
-                        .addGap(0, 77, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jbtRelatorio)
-                        .addComponent(jbtAlterar)
-                        .addComponent(jbtExcluir)
-                        .addComponent(jbtListar)))
-                .addGap(18, 18, 18)
+                .addGap(11, 11, 11)
+                .addComponent(jbtVoltar)
+                .addGap(3, 3, 3)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtRelatorio)
+                    .addComponent(jbtAlterar)
+                    .addComponent(jbtExcluir)
+                    .addComponent(jbtListar))
+                .addGap(19, 19, 19)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -188,7 +210,7 @@ public class TelaListar extends javax.swing.JFrame {
         } else if ("peca".equals(origem)) {
             modelo = new DefaultTableModel(
                     new Object[][]{},
-                    new String[]{"Código", "Nome", "Quantidade", "Preço"}
+                    new String[]{"Id","Código", "Nome", "Quantidade", "Preço"}
             );
             jtbListar.setModel(modelo);
             PecaDAO pecaDAO = new PecaDAO();
@@ -200,6 +222,7 @@ public class TelaListar extends javax.swing.JFrame {
             }
             for (Peca peca : pecas) {
                 modelo.addRow(new Object[]{
+                    peca.getId(),
                     peca.getCod(),
                     peca.getNome(),
                     peca.getQntdEstoque(),
@@ -278,6 +301,13 @@ public class TelaListar extends javax.swing.JFrame {
         jbtAlterar.addActionListener(e -> atualizarRegistro(linhaSelecionada)); // Ação de atualização
     }//GEN-LAST:event_jbtAlterarActionPerformed
 
+    private void jbtRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtRelatorioActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        TelaHistMov tela = new TelaHistMov();
+        tela.setVisible(true);
+    }//GEN-LAST:event_jbtRelatorioActionPerformed
+
     private void atualizarRegistro(int linhaSelecionada) {
         // Obtém os dados da linha selecionada
         int id = Integer.parseInt(jtbListar.getValueAt(linhaSelecionada, 0).toString());
@@ -345,6 +375,7 @@ public class TelaListar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbtAlterar;

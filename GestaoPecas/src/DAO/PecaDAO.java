@@ -5,7 +5,6 @@
 package DAO;
 
 import gestaopecas.Peca;
-import gestaopecas.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,8 +19,6 @@ import javax.swing.JOptionPane;
 public class PecaDAO {
 
     private Connection con;
-    ResultSet rs;
-    PreparedStatement pstm;
 
     public PecaDAO() {
         this.con = new ConexaoBanco().getConexao();
@@ -30,10 +27,10 @@ public class PecaDAO {
     public void cadastrarPeca(Peca peca) {
         String sql = "insert into peca(codigo,nome,qtd_estoque,preco)values(?,?,?,?)";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, peca.getCod());
-            ps.setString(2, peca.getNome());
-            ps.setInt(3, peca.getQntdEstoque());
-            ps.setDouble(4, peca.getPreco());
+            ps.setString(2, peca.getCod());
+            ps.setString(3, peca.getNome());
+            ps.setInt(4, peca.getQntdEstoque());
+            ps.setDouble(5, peca.getPreco());
 
             ps.execute();
             ps.close();
@@ -54,6 +51,7 @@ public class PecaDAO {
                         pecas = new ArrayList<>();
                     }
                     Peca peca = new Peca();
+                    peca.setId(rs.getInt("id"));
                     peca.setCod(rs.getString("codigo"));
                     peca.setNome(rs.getString("nome"));
                     peca.setQntdEstoque(rs.getInt("qtd_estoque"));

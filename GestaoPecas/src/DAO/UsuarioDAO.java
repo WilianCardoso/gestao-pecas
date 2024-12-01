@@ -19,9 +19,7 @@ import javax.swing.JOptionPane;
 public class UsuarioDAO {
 
     private Connection con;
-    ResultSet rs;
-    PreparedStatement pstm;
-
+  
     public UsuarioDAO() {
         this.con = new ConexaoBanco().getConexao();
     }
@@ -30,10 +28,10 @@ public class UsuarioDAO {
         Usuario usuario = null;
         String sql = "select * from usuario where nome = ? and senha = ?";
 
-        try (Connection connection = new ConexaoBanco().getConexao(); PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, nome);
-            stmt.setString(2, senha);
-            try (ResultSet rs = stmt.executeQuery()) {
+        try (Connection connection = new ConexaoBanco().getConexao(); PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, nome);
+            ps.setString(2, senha);
+            try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     usuario = new Usuario();
                     usuario.setNome(rs.getString("nome"));

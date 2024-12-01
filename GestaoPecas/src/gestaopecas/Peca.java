@@ -9,11 +9,20 @@ package gestaopecas;
  * @author wilian_g_cardoso
  */
 public class Peca {
-
+    
+    private int id;
     private String cod;
     private String nome;
     private int qntdEstoque;
     private double preco;
+
+    public Peca(int id, String cod, String nome, int qntdEstoque, double preco) {
+        this.id = id;
+        this.cod = cod;
+        this.nome = nome;
+        this.qntdEstoque = qntdEstoque;
+        this.preco = preco;
+    }
 
     public Peca(String cod, String nome, int qntdEstoque, double preco) {
         this.cod = cod;
@@ -21,6 +30,7 @@ public class Peca {
         this.qntdEstoque = qntdEstoque;
         this.preco = preco;
     }
+    
 
     public Peca() {
     }
@@ -57,4 +67,13 @@ public class Peca {
         this.preco = preco;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
 }
