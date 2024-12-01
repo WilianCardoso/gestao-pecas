@@ -10,7 +10,7 @@ package gestaopecas;
  */
 public class Usuario {
 
-    private String id;
+    private int id;
     private String nome;
     private String senha;
     private boolean tipo_usuario;
@@ -25,20 +25,22 @@ public class Usuario {
         this.tipo_usuario = tipo_usuario;
     }
 
-    public Usuario(String id, String nome, String senha, boolean tipo_usuario) {
+    public Usuario(int id, String nome, String senha, boolean tipo_usuario) {
         this.id = id;
         this.nome = nome;
         this.senha = senha;
         this.tipo_usuario = tipo_usuario;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
+
+ 
 
     public String getNome() {
         return nome;

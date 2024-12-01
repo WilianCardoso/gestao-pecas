@@ -147,13 +147,13 @@ public class TelaLogin extends javax.swing.JFrame {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         String nome = jtfUsu.getText().trim();
         String senha = new String(jpfSenha.getPassword());
-        
+
         if (nome.isEmpty() || senha.isEmpty()) {
             // Se algum campo estiver vazio, exibe uma mensagem de erro
             JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos.");
             return; // Impede que o login prossiga
         }
-        
+
         // Validar o usuário
         Usuario usuario = usuarioDAO.logar(nome, senha);
 

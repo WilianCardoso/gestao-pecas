@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -59,5 +60,29 @@ public class UsuarioDAO {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao adicionar usuario!");
         }
+    }
+    
+    public ArrayList<Usuario> getUsuarios() {
+        String SQL = "SELECT * FROM usuario";
+        ArrayList<Usuario> usuarios = null;
+
+        try (Connection connection = new ConexaoBanco().getConexao(); PreparedStatement ps = connection.prepareStatement(SQL)) {
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    if (usuarios == null) {
+                        usuarios = new ArrayList<>();
+                    }
+                    Usuario usuario = new Usuario();
+                    usuario.setId(rs.getInt("id"));
+                    usuario.setNome(rs.getString("nome"));
+                    usuario.setSenha(rs.getString("senha"));
+                    usuario.setTipo_usuario(rs.getBoolean("tipo_usuario"));
+                    usuarios.add(usuario);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao obter lista de usuários: " + e.getMessage(), e);
+        }
+        return usuarios;
     }
 }

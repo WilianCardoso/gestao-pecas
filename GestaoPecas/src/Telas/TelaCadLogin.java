@@ -201,7 +201,7 @@ public class TelaCadLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jpfSenhaActionPerformed
 
     private void jbtCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCadastrarActionPerformed
-       
+
         // Verificar se os campos estão preenchidos corretamente
         if (jtfUsu.getText().isBlank() || jpfSenha.getText().isBlank() || (!jrbAdmin.isSelected() && !jrbFunc.isSelected())) {
             // Exibir mensagem de erro se algum campo estiver vazio ou nenhum botão de rádio estiver selecionado
@@ -248,9 +248,9 @@ public class TelaCadLogin extends javax.swing.JFrame {
 
     private void jbtListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtListarActionPerformed
         // TODO add your handling code here:
-        dispose();
-        TelaListar tela = new TelaListar();
-        tela.setVisible(true);
+        TelaListar telaListar = new TelaListar("usuario");
+        telaListar.setVisible(true);
+        dispose(); // Fecha a tela atual
     }//GEN-LAST:event_jbtListarActionPerformed
 
     private void jrbAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbAdminActionPerformed

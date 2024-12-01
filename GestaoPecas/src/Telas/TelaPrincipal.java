@@ -184,7 +184,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     public void habilitarModoAdministrador() {
-        //  menuAdmin.setEnabled(true);  // Habilitar funcionalidades de administrador
+        // Habilitar funcionalidades de administrador
 
     }
 

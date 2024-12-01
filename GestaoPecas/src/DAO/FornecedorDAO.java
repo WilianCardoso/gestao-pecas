@@ -5,9 +5,12 @@
 package DAO;
 
 import gestaopecas.Fornecedor;
+import gestaopecas.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -38,5 +41,32 @@ public class FornecedorDAO {
             } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao Cadastrar fornecedor!");
         }
+    }
+    
+     public ArrayList<Fornecedor> getFornecedores() {
+        String SQL = "SELECT * FROM fornecedor";
+        ArrayList<Fornecedor> fornecedores = null;
+
+        try (Connection connection = new ConexaoBanco().getConexao();
+                PreparedStatement ps = connection.prepareStatement(SQL)) {
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    if (fornecedores == null) {
+                        fornecedores = new ArrayList<>();
+                    }
+                    Fornecedor fornecedor = new Fornecedor();
+                    fornecedor.setId(rs.getInt("id"));
+                    fornecedor.setNome(rs.getString("nome"));
+                    fornecedor.setCnpj_cpf(rs.getInt("cnpj_cpf"));
+                    fornecedor.setTelefone(rs.getInt("telefone"));
+                    fornecedor.setEmail(rs.getString("email"));
+                    fornecedor.setEndereco(rs.getString("endereco"));
+                    fornecedores.add(fornecedor);
+                }
+            }
+        } catch (SQLException e) {
+             throw new RuntimeException("Erro ao obter lista de fornecedores: " + e.getMessage(), e);
+        }
+        return fornecedores;
     }
 }

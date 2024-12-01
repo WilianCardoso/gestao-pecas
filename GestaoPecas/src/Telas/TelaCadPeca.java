@@ -13,7 +13,9 @@ import javax.swing.JOptionPane;
  * @author wilian_g_cardoso
  */
 public class TelaCadPeca extends javax.swing.JFrame {
+
     private Peca peca;
+
     /**
      * Creates new form TelaCadPeca
      */
@@ -42,25 +44,37 @@ public class TelaCadPeca extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jbtCadastrar = new javax.swing.JButton();
+        jbtListar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Peça");
 
         jPanel1.setToolTipText("");
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(jtfCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 46, 174, -1));
+        jPanel1.add(jtfNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 92, 174, -1));
+        jPanel1.add(jtfQtdEstoq, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 148, 174, -1));
+        jPanel1.add(jtfPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 204, 174, -1));
 
         jLabel1.setText("Código");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 49, -1, -1));
 
         jLabel2.setText("Nome");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(191, 95, -1, -1));
 
         jLabel3.setText("Quantidade");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 151, -1, -1));
 
         jLabel4.setText("Preço");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 207, -1, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Telas/fundoTelaLogin.jpg"))); // NOI18N
         jLabel5.setText("jLabel5");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Cadastro de Peça");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 6, -1, -1));
 
         jbtCadastrar.setText("Cadastrar");
         jbtCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -68,66 +82,15 @@ public class TelaCadPeca extends javax.swing.JFrame {
                 jbtCadastrarActionPerformed(evt);
             }
         });
+        jPanel1.add(jbtCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 271, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jLabel6)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfCod, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtfQtdEstoq, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtfPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jbtCadastrar)
-                                .addGap(72, 72, 72))))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel5)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfQtdEstoq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbtCadastrar)
-                .addContainerGap())
-        );
+        jbtListar.setText("Listar");
+        jbtListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtListarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jbtListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 271, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,7 +111,7 @@ public class TelaCadPeca extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!jtfCod.getText().isBlank() && !jtfNome.getText().isBlank() && !jtfQtdEstoq.getText().isBlank() && !jtfPreco.getText().isBlank()) {
             PecaDAO dao = new PecaDAO();
-            peca = new Peca(jtfCod.getText(), jtfNome.getText(),Integer.parseInt(jtfQtdEstoq.getText()), Double.parseDouble(jtfPreco.getText()));
+            peca = new Peca(jtfCod.getText(), jtfNome.getText(), Integer.parseInt(jtfQtdEstoq.getText()), Double.parseDouble(jtfPreco.getText()));
             dao.cadastrarPeca(peca);
             jtfCod.setText("");
             jtfNome.setText("");
@@ -158,6 +121,13 @@ public class TelaCadPeca extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Campo está vazio!");
         }
     }//GEN-LAST:event_jbtCadastrarActionPerformed
+
+    private void jbtListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtListarActionPerformed
+        // TODO add your handling code here:
+        TelaListar telaListar = new TelaListar("peca");
+        telaListar.setVisible(true);
+        dispose(); // Fecha a tela atual
+    }//GEN-LAST:event_jbtListarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,6 +173,7 @@ public class TelaCadPeca extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbtCadastrar;
+    private javax.swing.JButton jbtListar;
     private javax.swing.JTextField jtfCod;
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfPreco;
